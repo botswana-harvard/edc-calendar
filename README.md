@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/botswana-harvard/edc-calendar.svg)](https://travis-ci.org/botswana-harvard/edc-calendar)
+
 # edc-calendar
 
 To schedule an appointment that falls on a day that the clinic is open, isn't a holiday and isn't already over-booked:
