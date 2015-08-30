@@ -1,0 +1,4 @@
+Django==1.8
+python-dateutil
+pytz
+unipath

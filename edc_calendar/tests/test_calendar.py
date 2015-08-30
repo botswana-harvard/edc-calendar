@@ -15,7 +15,7 @@ class TestCalendar(unittest.TestCase):
             self.assertEqual(expected_answers[i], fn(i))
 
     def test_allowed_weekday(self):
-        calendar = Calendar()
+        calendar = Calendar(forward_only=True)
         day = MO
         self.assertEqual(day, calendar.best_day(day))
         day = TU
@@ -32,7 +32,7 @@ class TestCalendar(unittest.TestCase):
         self.assertEqual(MO, calendar.best_day(day))
 
     def test_allowed_weekday_limited(self):
-        calendar = Calendar(allowed_weekdays=[TU, TH], forward_only=False)
+        calendar = Calendar(allowed_weekdays=[TU, TH])
         day = MO
         self.assertEqual(TU, calendar.best_day(day))
         day = TU
@@ -49,7 +49,7 @@ class TestCalendar(unittest.TestCase):
         self.assertEqual(TU, calendar.best_day(day))
 
     def test_allowed_weekday_limited2(self):
-        calendar = Calendar(allowed_weekdays=[TU, WE, TH], forward_only=False)
+        calendar = Calendar(allowed_weekdays=[TU, WE, TH])
         day = MO
         self.assertEqual(TU, calendar.best_day(day))
         day = TU
@@ -66,7 +66,7 @@ class TestCalendar(unittest.TestCase):
         self.assertEqual(TU, calendar.best_day(day))
 
     def test_allowed_weekday_limited3(self):
-        calendar = Calendar(allowed_weekdays=[TU, WE, TH])
+        calendar = Calendar(allowed_weekdays=[TU, WE, TH], forward_only=True)
         day = MO
         self.assertEqual(TU, calendar.best_day(day))
         day = TU
@@ -83,7 +83,7 @@ class TestCalendar(unittest.TestCase):
         self.assertEqual(TU, calendar.best_day(day))
 
     def test_allowed_weekday_limited4(self):
-        calendar = Calendar(allowed_weekdays=[MO, WE, FR], forward_only=False)
+        calendar = Calendar(allowed_weekdays=[MO, WE, FR])
         day = MO
         self.assertEqual(MO, calendar.best_day(day))
         day = TU
@@ -103,7 +103,7 @@ class TestCalendar(unittest.TestCase):
         """Asserts finds best datetime on next wednesday after new_appt_datetime."""
         my_datetime = datetime(2015, 8, 5)
         new_appt_datetime = my_datetime + relativedelta(months=3)
-        calendar = Calendar()  # forward_only=True
+        calendar = Calendar(forward_only=True)
         best_datetime = calendar.best_datetime(new_appt_datetime, my_datetime.isoweekday() - 1)
         self.assertEqual(best_datetime, datetime(2015, 11, 11, 0, 0))
         self.assertEqual(my_datetime.isoweekday(), best_datetime.isoweekday())
@@ -112,10 +112,16 @@ class TestCalendar(unittest.TestCase):
         """Asserts finds best datetime on previous wednesday after new_appt_datetime."""
         my_datetime = datetime(2015, 8, 5)
         new_appt_datetime = my_datetime + relativedelta(months=3)
-        calendar = Calendar(forward_only=False)
+        calendar = Calendar()
         best_datetime = calendar.best_datetime(new_appt_datetime, my_datetime.isoweekday() - 1)
         self.assertEqual(best_datetime, datetime(2015, 11, 4, 0, 0))
         self.assertEqual(my_datetime.isoweekday(), best_datetime.isoweekday())
+
+    def test_increment_forwards(self):
+        appt_datetime = datetime(2015, 8, 6)
+        calendar = Calendar(allowed_weekdays=[TU, TH])
+        appt_datetime = calendar.increment_forward(appt_datetime)
+        self.assertEqual(appt_datetime, datetime(2015, 8, 11))
 
 if __name__ == '__main__':
     unittest.main()
