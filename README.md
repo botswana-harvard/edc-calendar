@@ -4,11 +4,11 @@
 
 To schedule an appointment that falls on a day that the clinic is open, isn't a holiday and isn't already over-booked:
 
-	from datetime import datetime
-	from edc_calendar import Calendar
-
-	suggested_appt_datetime = datetime(2015, 8, 5)
-    best_datetime = calendar.best_datetime(appt_datetime)
+    from datetime import datetime
+    from edc_calendar import Calendar
+    
+    suggested_appt_datetime = datetime(2015, 8, 5)
+    appt_datetime = calendar.best_datetime(suggested_appt_datetime)
 
 
 If holidays are entered (in model `Holiday`) and the appointment lands on a holiday, the appointment date is incremented forward to an allowed weekday:
@@ -79,7 +79,7 @@ Returns the closest day from the list of allowed days. For example, if a clinic 
 	
 calendar.best_datetime
 ----------------------
-Returns the best datetime given an appointment datetime and a weekday number that the appointment should fall on. 
+Returns the best datetime given an appointment datetime and a weekday number that the appointment should fall on. If you do not specify the weekday number that the appointment should fall on (`weekday_number`) the weekday_number of the `suggested_appt_datetime` will be used.
 
 	from datetime import datetime
 	from dateutil.relativedelta import MO, WE, FR, SA, SU, relativedelta
@@ -87,9 +87,9 @@ Returns the best datetime given an appointment datetime and a weekday number tha
 	
 	calendar = Calendar()
     base_appt_datetime = datetime(2015, 8, 5)  # Wednesday
-    appt_datetime = base_appt_datetime + relativedelta(months=3)
-    print(appt_datetime)  # 2015-11-05 00:00:00, Thursday
-    best_datetime = calendar.best_datetime(appt_datetime, base_appt_datetime.isoweekday() - 1)
+    suggested_appt_datetime = base_appt_datetime + relativedelta(months=3)
+    print(suggested_appt_datetime)  # 2015-11-05 00:00:00, Thursday
+    best_datetime = calendar.best_datetime(suggested_appt_datetime, base_appt_datetime.isoweekday() - 1)
     print(best_datetime)  # 2015-11-04 00:00:00, Wednesday
 
 	
