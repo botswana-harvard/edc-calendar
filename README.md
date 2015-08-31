@@ -37,6 +37,8 @@ date will be incremented forward to an allowed weekday that has not reached the 
 Configuration
 -------------
 
+(all can be done in Admin)
+
 Add facilities (such as clinics) each of which may have different "clinic days":
 
 	facility = Facility.objects.create(name='Gumare Clinic')
