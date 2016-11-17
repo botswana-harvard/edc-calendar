@@ -1,9 +1,10 @@
 from django.contrib import admin
 
+from .admin_site import edc_calendar_admin
 from .models import Holiday, Facility, FacilityDay
 
 
-@admin.register(Holiday)
+@admin.register(Holiday, site=edc_calendar_admin)
 class HolidayAdmin(admin.ModelAdmin):
 
     date_hierarchy = 'date'
@@ -16,14 +17,14 @@ class FacilityDayInlineAdmin(admin.TabularInline):
     list_display = ('facility_day', 'appointments_per_day')
 
 
-@admin.register(Facility)
+@admin.register(Facility, site=edc_calendar_admin)
 class FacilityAdmin(admin.ModelAdmin):
 
     list_display = ('name', )
     inlines = [FacilityDayInlineAdmin]
 
 
-@admin.register(FacilityDay)
+@admin.register(FacilityDay, site=edc_calendar_admin)
 class FacilityDayAdmin(admin.ModelAdmin):
 
     list_display = ('facility', 'facility_day', 'appointments_per_day')
