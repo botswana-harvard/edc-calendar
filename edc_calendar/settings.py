@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'edc_protocol.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
     'edc_visit_tracking.apps.AppConfig',
-    'edc_calendar.apps.EdcConsentAppConfig',
-    'edc_calendar.apps.EdcTimepointAppConfig',
+    'edc_example.apps.EdcConsentAppConfig',
+    'edc_example.apps.EdcTimepointAppConfig',
     'edc_calendar.apps.AppConfig',
 ]
 

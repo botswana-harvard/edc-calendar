@@ -3,33 +3,37 @@
 
 # edc-calendar
 
+
+Moved to edc_appointment
+See edc_appointment.facility
+
+
 To schedule an appointment that falls on a day that the clinic is open, isn't a holiday and isn't already over-booked:
 
-    from datetime import datetime
-    from edc_calendar import Calendar
+    from django.utils import timezone
+    from .facility import Facility
     
-    suggested_appt_datetime = datetime(2015, 8, 5)
-    appt_datetime = calendar.best_datetime(suggested_appt_datetime)
+    suggested_datetime = timezone.now()
+    available_datetime = facility.available_datetime(suggested_datetime)
 
 
-If holidays are entered (in model `Holiday`) and the appointment lands on a holiday, the appointment date is incremented forward to an allowed weekday:
+If holidays are entered (in model `Holiday`) and the appointment lands on a holiday, the appointment date is incremented forward to an allowed weekday. Assuming `facility` is configured in `app_config` to only schedule appointments on [TU, TH]:
 
-    import pytz
     from datetime import datetime
     from dateutil.relativedelta import TU, TH
     from django.conf import settings
-	from edc_calendar import Calendar, Holiday
-    
-    tz = pytz.timezone(settings.TIME_ZONE)
+    from django.utils import timezone
+
+    from .facility import Facility
+	from .models import Holiday
     
     Holiday.objects.create(
         name='Id-ul-Adha (Feast of the Sacrifice)',
         date=tz.localize(datetime(2015, 9, 24))
     )
-    appt_datetime = datetime(2015, 9, 24)  # TH
-    calendar = Calendar(forward_only=False, allowed_weekdays=[TU, TH])
-    best_datetime = calendar.best_datetime(appt_datetime, appt_datetime.isoweekday() - 1)
-    print(best_datetime)  # 2015-09-29 00:00:00, TU
+    suggested_datetime = timezone.make_aware(datetime(2015, 9, 24))  # TH
+    available_datetime = facility.available_datetime(suggested_datetime)
+    print(available_datetime)  # 2015-09-29 00:00:00, TU
 
 You can also set a maximum number of appointments allowed per day. As with the holiday example above, the appointment
 date will be incremented forward to an allowed weekday that has not reached the maximum number of appointments.
@@ -37,62 +41,12 @@ date will be incremented forward to an allowed weekday that has not reached the 
 Configuration
 -------------
 
-(all can be done in Admin)
+Add each facility to `app_config.facilities` specifying the facility name, weekdays open and the maximum number of slots available per day:
 
-Add facilities (such as clinics) each of which may have different "clinic days":
+    from edc_appointment.apps import AppConfig as EdcAppointmentAppConfig
 
-	facility = Facility.objects.create(name='Gumare Clinic')
-	
-To each facility add the days on which appointments may be made and the maximum number of appointments allowed per day:
+    class AppConfig(EdcAppointmentAppConfig):
 
-    for weekday_number in [TU.weekday, TH.weekday]:
-        FacilityDay.objects.create(
-            facility=facility,
-            facility_day=weekday_number,
-            appointments_per_day=10,
-        )
-
-You can inspect the days like this:
-
-	>>> FacilityDay.objects.days(facility)
-	[TU, TH]
-	
-Add your holidays
-
-    Holiday.objects.create(
-        name='Id-ul-Adha (Feast of the Sacrifice)',
-        date=tz.localize(datetime(2015, 9, 24))
-    )
-
-calendar.best_day
------------------
-Returns the closest day from the list of allowed days. For example, if a clinic is only open MO, WE, FR:
-
-	from dateutil.relativedelta import MO, WE, FR, SA, SU
-	from edc_calendar import Calendar
-	
-	calendar = Calendar(allowed_days=[MO, WE, FR], forward_only=False)
-	print(calendar.best_day(MO)  # MO
-	print(calendar.best_day(TU)  # MO
-	print(calendar.best_day(WE)  # WE
-	print(calendar.best_day(TH)  # WE
-	print(calendar.best_day(FR)  # FR
-	print(calendar.best_day(SA)  # FR
-	print(calendar.best_day(SU)  # MO
-	
-calendar.best_datetime
-----------------------
-Returns the best datetime given an appointment datetime and a weekday number that the appointment should fall on. If you do not specify the weekday number that the appointment should fall on (`weekday_number`) the weekday_number of the `suggested_appt_datetime` will be used.
-
-	from datetime import datetime
-	from dateutil.relativedelta import MO, WE, FR, SA, SU, relativedelta
-	from edc_calendar import Calendar
-	
-	calendar = Calendar()
-    base_appt_datetime = datetime(2015, 8, 5)  # Wednesday
-    suggested_appt_datetime = base_appt_datetime + relativedelta(months=3)
-    print(suggested_appt_datetime)  # 2015-11-05 00:00:00, Thursday
-    best_datetime = calendar.best_datetime(suggested_appt_datetime, base_appt_datetime.isoweekday() - 1)
-    print(best_datetime)  # 2015-11-04 00:00:00, Wednesday
-
-	
+        facilities = {
+            'clinic1': Facility(name='clinic', days=[MO, TU, WE, TH, FR], slots=[100, 100, 100, 100, 100])}
+            'clinic2': Facility(name='clinic', days=[MO, WE, FR], slots=[30, 30, 30])}
