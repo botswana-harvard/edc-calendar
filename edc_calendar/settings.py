@@ -138,6 +138,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#KEY_PATH = '/Users/kmotingwa/source/edc-calendar/crypto-fields'
+
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',

@@ -21,3 +21,6 @@ git+https://github.com/botswana-harvard/edc-protocol
 git+https://github.com/botswana-harvard/edc-visit-schedule
 git+https://github.com/botswana-harvard/edc-visit-tracking
 git+https://github.com/botswana-harvard/edc-timepoint
+git+https://github.com/botswana-harvard/edc-constants.git
+git+https://github.com/botswana-harvard/edc-consent@develop#egg=edc_consent
+
