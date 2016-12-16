@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'edc_example.apps.EdcConsentAppConfig',
     'edc_example.apps.EdcTimepointAppConfig',
     'edc_calendar.apps.AppConfig',
+    'djangobower',
+    'schedule',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +137,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+]
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'bower_components')
+
+BOWER_INSTALLED_APPS = [
+    'jquery',
+    'bootstrap'
+]
