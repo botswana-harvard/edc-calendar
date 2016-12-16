@@ -10,7 +10,7 @@ Integrates the django-scheduler app to manipulate appointments from edc-appointm
 
 pip install -r requirements.txt
 
-# edit settings.py
+## edit settings.py
 
 Add 'schedule' and 'djangobower' to INSTALLED_APPS
 Run: npm install -g bower
