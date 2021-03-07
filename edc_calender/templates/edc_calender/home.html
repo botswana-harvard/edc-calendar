@@ -21,9 +21,11 @@
 
 {{ block.super }}
 
-<div class="container bg-3 ">
+<div class="clearfix">
+	<a class="btn btn-info left" href="{% url 'home_url' %}?{{ prev_month }}"> Previous Month </a>
+	<a class="btn btn-info right" href="{% url 'home_url' %}?{{ next_month }}"> Next Month </a>
+</div>
 
 {{ calendar }}
-</div>
 
 {% endblock main %}

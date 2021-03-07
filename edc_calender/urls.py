@@ -25,10 +25,9 @@ app_name = 'edc_calender'
 
 urlpatterns = [
 
-    path('admin/', edc_calender_admin.urls),
+    path('edc_calender/', edc_calender_admin.urls),
     path('accounts/', include('edc_base.auth.urls')),
     path('admin/', include('edc_base.auth.urls')),
-    path('admin/', admin.site.urls),
     
     path('administration/', AdministrationView.as_view(),
          name='administration_url'),

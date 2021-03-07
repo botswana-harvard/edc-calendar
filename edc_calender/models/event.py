@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls.base import reverse
 
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import SiteModelMixin
@@ -41,3 +42,8 @@ class Event(
 
     class Meta:
         app_label = "edc_calender"
+
+    @property
+    def get_html_url(self):
+        url = '#'
+        return f'<a href="{url}"> {self.title} </a>'
