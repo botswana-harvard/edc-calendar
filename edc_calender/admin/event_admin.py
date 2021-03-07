@@ -38,6 +38,7 @@ class EventAdmin(
     fieldsets = (
         (None, {
             'fields': (
+                'subject_identifier',
                 'title',
                 'description',
                 'start_time',
@@ -45,4 +46,4 @@ class EventAdmin(
             )}),
         audit_fieldset_tuple)
 
-    search_fields = ['title']
+    search_fields = ['subject_identifier', 'title']
