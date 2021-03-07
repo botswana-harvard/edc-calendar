@@ -1,31 +1,16 @@
 {% extends 'edc_calender/base.html' %}
 {% load static %}
 
-{% block scripts %}
-{{ block.super }}
- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-{% endblock scripts %}
-
-{% block extra-css %}
-{{ block.super }}
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+{% block extra-styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'edc_calender/css/style.css' %}">
-{% endblock extra-css %}
+{% endblock extra-styles %}
+
 {% block main %}
-
-<style></style>
-
-
-{{ block.super }}
-
 <div class="clearfix">
 	<a class="btn btn-info left" href="{% url 'home_url' %}?{{ prev_month }}"> Previous Month </a>
 	<a class="btn btn-info right" href="{% url 'home_url' %}?{{ next_month }}"> Next Month </a>
 </div>
-
 {{ calendar }}
+<hr>
 
 {% endblock main %}

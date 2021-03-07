@@ -1,4 +1,3 @@
-from datetime import datetime, timedelta
 from calendar import HTMLCalendar
 from .models import Event
 
@@ -23,7 +22,7 @@ class Calendar(HTMLCalendar):
     # formats a week as a tr
     def formatweek(self, theweek, events):
         week = ''
-        for d, weekday in theweek:
+        for d, _ in theweek:
             week += self.formatday(d, events)
         return f'<tr> {week} </tr>'
 

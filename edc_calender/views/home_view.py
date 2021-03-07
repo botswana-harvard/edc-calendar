@@ -1,10 +1,7 @@
 import calendar
 
 from datetime import datetime, timedelta, date
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -30,7 +27,7 @@ class HomeView(
         d = get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
         html_cal = cal.formatmonth(withyear=True)
-
+        html_cal += '</table>'
         context.update(
             calendar=mark_safe(html_cal),
             prev_month=prev_month(d),
