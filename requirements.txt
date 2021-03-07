@@ -27,3 +27,4 @@ git+https://github.com/botswana-harvard/edc-model-admin.git@0.1.1#egg=edc-model-
 git+https://github.com/botswana-harvard/edc-device.git@0.2.6#egg=edc-device
 git+https://github.com/botswana-harvard/edc-model-wrapper.git@develop#egg=edc_model_wrapper
 git+https://github.com/botswana-harvard/edc-dashboard.git@develop#egg=edc_dashboard
+git+https://github.com/botswana-harvard/edc-protocol.git@develop#egg=edc_protocol
