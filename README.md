@@ -1,2 +1,2 @@
-# edc-calander
-EDC Calander
+# edc-calender
+EDC Calender

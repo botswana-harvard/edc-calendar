@@ -9,18 +9,18 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
-    name='edc-calander',
+    name='edc-calender',
     version='0.1.0',
     author=u'Software Engineering & Data Management',
     author_email='se-dmc@bhp.org.bw',
     packages=find_packages(),
     include_package_data=True,
-    url='https://github.com/botswana-harvard/edc-calander',
+    url='https://github.com/botswana-harvard/edc-calender',
     license='GPL licence, see LICENCE',
-    description='EDC calander for events management.',
+    description='EDC calender for events management.',
     long_description=README,
     zip_safe=False,
-    keywords='django calander',
+    keywords='django calender',
     install_requires=[
         'django',
         'django[argon2]',
