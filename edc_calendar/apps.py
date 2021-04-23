@@ -11,7 +11,7 @@ class AppConfig(DjangoAppConfig):
     verbose_name = 'Edc Calender'
 
     def ready(self):
-        from edc_calendar import create_or_update_calender_event_on_post_save
+        from edc_calendar.signals import create_or_update_calender_event_on_post_save
 
 if settings.APP_NAME == 'edc_calendar':
     from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfig
