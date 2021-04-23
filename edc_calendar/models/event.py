@@ -49,7 +49,7 @@ class Event(
         return f'{self.subject_identifier} {self.title}'
 
     class Meta:
-        app_label = "edc_calender"
+        app_label = "edc_calendar"
 
     @property
     def get_html_url(self):

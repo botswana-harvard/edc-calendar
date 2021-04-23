@@ -7,5 +7,5 @@ from edc_navbar import NavbarViewMixin
 class AdministrationView(EdcBaseViewMixin, NavbarViewMixin,
                          AdministrationViewMixin, TemplateView):
 
-    navbar_name = 'edc_calender'
+    navbar_name = 'edc_calendar'
     navbar_selected_item = 'administration'
