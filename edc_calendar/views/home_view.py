@@ -9,8 +9,8 @@ from django.utils.decorators import method_decorator
 from edc_base.view_mixins import EdcBaseViewMixin
 from edc_navbar import NavbarViewMixin
 
-from edc_calendar import Calendar
-from edc_calendar import Event
+from edc_calendar.utils import Calendar
+from edc_calendar.models import Event
 
 
 class HomeView(

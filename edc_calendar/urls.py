@@ -18,8 +18,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from edc_calendar import AdministrationView, HomeView
-from edc_calendar import edc_calender_admin
+from edc_calendar.views import AdministrationView, HomeView
+from edc_calendar.admin_site import edc_calender_admin
 
 app_name = 'edc_calendar'
 
