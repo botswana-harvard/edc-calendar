@@ -1,4 +1,4 @@
-"""edc_calender URL Configuration
+"""edc_calendar URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -18,14 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import AdministrationView, HomeView
-from .admin_site import edc_calender_admin
+from edc_calendar import AdministrationView, HomeView
+from edc_calendar import edc_calender_admin
 
-app_name = 'edc_calender'
+app_name = 'edc_calendar'
 
 urlpatterns = [
 
-    path('edc_calender/', edc_calender_admin.urls),
+    path('edc_calendar/', edc_calender_admin.urls),
     path('accounts/', include('edc_base.auth.urls')),
     path('admin/', include('edc_base.auth.urls')),
     

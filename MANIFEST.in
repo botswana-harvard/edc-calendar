@@ -1,2 +1,2 @@
 include AUTHORS CHANGES README.md LICENCE
-recursive-include edc_calander/templates *
+recursive-include edc_calandar/templates *

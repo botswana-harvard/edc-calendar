@@ -9,17 +9,17 @@ from django.utils.decorators import method_decorator
 from edc_base.view_mixins import EdcBaseViewMixin
 from edc_navbar import NavbarViewMixin
 
-from ..utils import Calendar
-from ..models import Event
+from edc_calendar import Calendar
+from edc_calendar import Event
 
 
 class HomeView(
         EdcBaseViewMixin, NavbarViewMixin, generic.ListView):
 
     model = Event
-    template_name = 'edc_calender/home.html'
-    navbar_name = 'edc_calender'
-    navbar_selected_item = 'edc_calender'
+    template_name = 'edc_calendar/home.html'
+    navbar_name = 'edc_calendar'
+    navbar_selected_item = 'edc_calendar'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
