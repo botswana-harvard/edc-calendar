@@ -1,0 +1,16 @@
+{% extends 'edc_calendar/base.html' %}
+{% load static %}
+
+{% block extra-styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'edc_calendar/css/style.css' %}">
+{% endblock extra-styles %}
+
+{% block main %}
+<div class="clearfix">
+	<a class="btn btn-info left" href="{% url 'edc_calendar:home_url' %}?{{ prev_month }}"> Previous Month </a>
+	<a class="btn btn-info right" href="{% url 'edc_calendar:home_url' %}?{{ next_month }}"> Next Month </a>
+</div>
+{{ calendar }}
+<hr>
+
+{% endblock main %}
