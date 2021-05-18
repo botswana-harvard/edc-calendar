@@ -9,13 +9,8 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
-<<<<<<< HEAD
     name='edc-calendar',
-    version='0.1.1',
-=======
-    name='edc-calender',
     version='0.1.2',
->>>>>>> 05f682f99503d7614c937a6b973c3bcfc22b7f91
     author=u'Software Engineering & Data Management',
     author_email='se-dmc@bhp.org.bw',
     packages=find_packages(),
