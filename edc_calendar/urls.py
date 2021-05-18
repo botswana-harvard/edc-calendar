@@ -19,13 +19,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 from edc_calendar.views import AdministrationView, HomeView
-from edc_calendar.admin_site import edc_calender_admin
+from edc_calendar.admin_site import edc_calendar_admin
 
 app_name = 'edc_calendar'
 
 urlpatterns = [
 
-    path('edc_calendar/', edc_calender_admin.urls),
+    path('edc_calendar/', edc_calendar_admin.urls),
     path('accounts/', include('edc_base.auth.urls')),
     path('admin/', include('edc_base.auth.urls')),
     

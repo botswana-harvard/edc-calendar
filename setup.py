@@ -17,7 +17,7 @@ setup(
     include_package_data=True,
     url='https://github.com/botswana-harvard/edc-calendar',
     license='GPL licence, see LICENCE',
-    description='EDC calender for events management.',
+    description='EDC calendar for events management.',
     long_description=README,
     zip_safe=False,
     keywords='django calendar',
