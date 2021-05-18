@@ -20,7 +20,7 @@ setup(
     description='EDC calender for events management.',
     long_description=README,
     zip_safe=False,
-    keywords='django calender',
+    keywords='django calendar',
     install_requires=[
         'django',
         'django[argon2]',
