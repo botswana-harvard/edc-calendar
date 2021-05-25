@@ -10,7 +10,7 @@ from edc_model_admin import (
     ModelAdminReadOnlyMixin, ModelAdminInstitutionMixin,
     ModelAdminRedirectOnDeleteMixin)
 
-from ..admin_site import edc_calender_admin
+from ..admin_site import edc_calendar_admin
 from ..forms import EventForm
 from ..models import Event
 
@@ -29,7 +29,7 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
 
 
 
-@admin.register(Event, site=edc_calender_admin)
+@admin.register(Event, site=edc_calendar_admin)
 class EventAdmin(
         ModelAdminMixin, admin.ModelAdmin):
 

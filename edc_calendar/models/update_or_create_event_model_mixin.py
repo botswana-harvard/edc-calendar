@@ -10,11 +10,11 @@ class UpdatesOrCreatesCalenderEventModelError(Exception):
 
 class UpdatesOrCreatesCalenderEventModelMixin(models.Model):
 
-    """A model mixin that creates or updates a calender event
+    """A model mixin that creates or updates a calendar event
     on post_save signal.
     """
 
-    def create_or_update_calender_event(self):
+    def create_or_update_calendar_event(self):
         """Creates or Updates the event model with attributes
         from this instance.
         Called from the signal
