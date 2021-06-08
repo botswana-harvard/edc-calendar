@@ -3,6 +3,11 @@
 
 {% block extra-styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'edc_calendar/css/style.css' %}">
+<style>
+span.small {
+  font-size: smaller;
+}
+</style>
 {% endblock extra-styles %}
 
 {% block main %}
@@ -10,7 +15,7 @@
 	<a class="btn btn-info left" href="{% url 'edc_calendar:home_url' %}?{{ prev_month }}"> Previous Month </a>
 	<a class="btn btn-info right" href="{% url 'edc_calendar:home_url' %}?{{ next_month }}"> Next Month </a>
 </div>
-{{ calendar }}
+<span class="small">{{ calendar }}</span>
 <hr>
 
 {% endblock main %}
