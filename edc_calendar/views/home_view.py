@@ -31,24 +31,23 @@ class HomeView(
     def form_valid(self, form):
         if form.is_valid():
             d = form.data['month']
-            filter_date = parser.parse(d)
+            filter_date = (parser.parse(d)).date()
             cal = Calendar(filter_date.year, filter_date.month)
             html_cal = cal.formatmonth(withyear=True)
             html_cal += '</table>'
             context = self.get_context_data(**self.kwargs)
             context.update(
                 calendar=mark_safe(html_cal),
-                prev_month=prev_month(d),
-                next_month=next_month(d))
-        return HttpResponseRedirect(
-                    reverse('edc_calendar:home_url')+
-                    f"?filter_date={filter_date}")
+                prev_month=prev_month(filter_date),
+                next_month=next_month(filter_date))
+            return HttpResponseRedirect(
+                        reverse('edc_calendar:home_url') +
+                        f"?filter_date={filter_date}")
 
     def get_context_data(self, **kwargs):
         self.object_list = self.get_queryset()
         context = super().get_context_data(**kwargs)
-        filter_date = get_date(self.request.GET.get('month', None))
-        print(filter_date, type(filter_date), '!!!!!!!!!!!!!!!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@')
+        filter_date = get_date(self.request.GET.get('filter_date', None))
         cal = Calendar(filter_date.year, filter_date.month)
         html_cal = cal.formatmonth(withyear=True)
         html_cal += '</table>'
@@ -62,18 +61,21 @@ class HomeView(
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
+
 def get_date(req_month):
     if req_month:
-        year, month = (int(x) for x in req_month.split('-'))
+        year, month, _ = (int(x) for x in req_month.split('-'))
         return date(year, month, day=1)
     return datetime.today()
 
+
 def prev_month(d):
-    print(d, type(d), '@@@@@@@@@@@@@@@@@@@@@@@')
+
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)
     month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
     return month
+
 
 def next_month(d):
     days_in_month = calendar.monthrange(d.year, d.month)[1]
@@ -81,6 +83,7 @@ def next_month(d):
     next_month = last + timedelta(days=1)
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
+
 
 def get_queryset(self):
         qs = super().get_queryset()
